@@ -1,0 +1,211 @@
+<?php
+session_start();
+require_once('db.php');
+
+if (!isset($_SESSION['user_r_pseudo'])) {
+    header('Location: signin.php');
+    exit;
+}
+
+function translateMessage($message) {
+    $translations = [
+        'fr' => [
+            'Votre profit total :' => 'Votre profit total :',
+            'Profit direct :' => 'Profit direct :',
+            'Profit indirect :' => 'Profit indirect :',
+            'DZD' => 'DZD',
+            'Votre profit a été réclamé avec succès.' => 'Votre profit a été réclamé avec succès.',
+            'Votre profit doit être supérieur ou égal à 3000 DZD pour pouvoir le réclamer.' => 'Votre profit doit être supérieur ou égal à 3000 DZD pour pouvoir le réclamer.',
+            'Vous pouvez réclamer votre profit uniquement les jeudis.' => 'Vous pouvez réclamer votre profit uniquement les jeudis.',
+            'Utilisateur non trouvé' => 'Utilisateur non trouvé',
+            'Vous devez avoir acheté pour calculer et réclamer votre profit.' => 'Vous devez avoir acheté pour calculer et réclamer votre profit.',
+            'Pseudonymes de l\'utilisateur racine non trouvés' => 'Pseudonymes de l\'utilisateur racine non trouvés'
+        ],
+        'ar' => [
+            'Votre profit total :' => 'إجمالي ربحك:',
+            'Profit direct :' => 'الربح المباشر:',
+            'Profit indirect :' => 'الربح غير المباشر:',
+            'DZD' => 'دينار جزائري',
+            'Votre profit a été réclamé avec succès.' => 'تم المطالبة بربحك بنجاح.',
+            'Votre profit doit être supérieur ou égal à 3000 DZD pour pouvoir le réclamer.' => 'يجب أن يكون ربحك 3000 دينار جزائري أو أكثر للمطالبة به.',
+            'Vous pouvez réclamer votre profit uniquement les jeudis.' => 'يمكنك المطالبة بربحك فقط أيام الخميس.',
+            'Utilisateur non trouvé' => 'لم يتم العثور على المستخدم',
+            'Vous devez avoir acheté pour calculer et réclamer votre profit.' => 'يجب أن تكون قد اشتريت لحساب وطلب ربحك.',
+            'Pseudonymes de l\'utilisateur racine non trouvés' => 'لم يتم العثور على أسماء المستعار للمستخدم الجذر'
+        ],
+        'en' => [
+            'Votre profit total :' => 'Your total profit:',
+            'Profit direct :' => 'Direct profit:',
+            'Profit indirect :' => 'Indirect profit:',
+            'DZD' => 'DZD',
+            'Votre profit a été réclamé avec succès.' => 'Your profit has been successfully claimed.',
+            'Votre profit doit être supérieur ou égal à 3000 DZD pour pouvoir le réclamer.' => 'Your profit must be 3000 DZD or more to claim it.',
+            'Vous pouvez réclamer votre profit uniquement les jeudis.' => 'You can only claim your profit on Thursdays.',
+            'Utilisateur non trouvé' => 'User not found',
+            'Vous devez avoir acheté pour calculer et réclamer votre profit.' => 'You must have bought to calculate and claim your profit.',
+            'Pseudonymes de l\'utilisateur racine non trouvés' => 'Root user pseudonyms not found'
+        ]
+    ];
+
+    $lang = $_COOKIE['language'] ?? 'fr';
+    return $translations[$lang][$message] ?? $message;
+}
+
+function getUserIdByPseudo($pseudo, $pdo) {
+    $stmt = $pdo->prepare("SELECT user_id FROM Users WHERE user_r_pseudo = ?");
+    $stmt->execute([$pseudo]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        return $user['user_id'];
+    } else {
+        exit(translateMessage('Utilisateur non trouvé'));
+    }
+}
+
+function getRootUserPseudos($userId, $pdo) {
+    $stmt = $pdo->prepare("SELECT user_l_pseudo, user_r_pseudo FROM Users WHERE user_id = ?");
+    $stmt->execute([$userId]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        return [$user['user_l_pseudo'], $user['user_r_pseudo']];
+    } else {
+        exit(translateMessage('Pseudonymes de l\'utilisateur racine non trouvés'));
+    }
+}
+
+function isReclaimed($rootPseudo, $descendantPseudo, $pdo) {
+    $stmt = $pdo->prepare("SELECT * FROM ReclaimedProfits WHERE root_pseudo = ? AND descendant_pseudo = ?");
+    $stmt->execute([$rootPseudo, $descendantPseudo]);
+    $reclaimed = $stmt->fetch(PDO::FETCH_ASSOC);
+    return !!$reclaimed;
+}
+
+function markDescendantsAsReclaimed($rootPseudo, $descendantPseudos, $pdo) {
+    $stmt = $pdo->prepare("INSERT INTO ReclaimedProfits (root_pseudo, descendant_pseudo) VALUES (?, ?)");
+    foreach ($descendantPseudos as $pseudo) {
+        if (!isReclaimed($rootPseudo, $pseudo, $pdo)) {
+            $stmt->execute([$rootPseudo, $pseudo]);
+        }
+    }
+}
+
+function fetchAllDescendantsWithLevel($userId, $rootLeftPseudo, $rootRightPseudo, $rootPseudo, $pdo, $side = null) {
+    $stmt = $pdo->prepare("SELECT user_id, user_r_pseudo, parrain_pseudo, bought FROM Users WHERE parent_user_id = ?");
+    $stmt->execute([$userId]);
+    $children = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    $descendants = [
+        'left' => ['count' => 0, 'descendantPseudos' => [], 'bonusCount' => 0, 'bonusDescendantPseudos' => []],
+        'right' => ['count' => 0, 'descendantPseudos' => [], 'bonusCount' => 0, 'bonusDescendantPseudos' => []]
+    ];
+    
+    foreach ($children as $child) {
+        $childSide = $side;
+        if ($side === null) {
+            $childSide = ($child['parrain_pseudo'] == $rootLeftPseudo) ? 'left' : 'right';
+        }
+        
+        $childDescendants = fetchAllDescendantsWithLevel($child['user_id'], $rootLeftPseudo, $rootRightPseudo, $rootPseudo, $pdo, $childSide);
+        
+        if ($child['bought'] && !isReclaimed($rootPseudo, $child['user_r_pseudo'], $pdo)) {
+            $descendants[$childSide]['count']++;
+            $descendants[$childSide]['descendantPseudos'][] = $child['user_r_pseudo'];
+            
+            if ($child['parrain_pseudo'] == $rootLeftPseudo || $child['parrain_pseudo'] == $rootRightPseudo) {
+                $descendants[$childSide]['bonusCount']++;
+                $descendants[$childSide]['bonusDescendantPseudos'][] = $child['user_r_pseudo'];
+            }
+        }
+        
+        $descendants[$childSide]['count'] += $childDescendants[$childSide]['count'];
+        $descendants[$childSide]['descendantPseudos'] = array_merge($descendants[$childSide]['descendantPseudos'], $childDescendants[$childSide]['descendantPseudos']);
+        $descendants[$childSide]['bonusCount'] += $childDescendants[$childSide]['bonusCount'];
+        $descendants[$childSide]['bonusDescendantPseudos'] = array_merge($descendants[$childSide]['bonusDescendantPseudos'], $childDescendants[$childSide]['bonusDescendantPseudos']);
+    }
+    
+    return $descendants;
+}
+
+function calculateAdjustedProfit($descendants, $pdo, $rootPseudo) {
+    $directProfit = 0;
+    $indirectProfit = 0;
+
+    foreach (['left', 'right'] as $side) {
+        $directProfit += $descendants[$side]['bonusCount'] * 3000;
+    }
+
+    $minCount = min($descendants['left']['count'], $descendants['right']['count']);
+    $indirectProfit = $minCount * 1000;
+
+    $totalProfit = $directProfit + $indirectProfit;
+
+    if (date('w') == 4) {
+        $leftToReclaim = array_slice($descendants['left']['descendantPseudos'], 0, $minCount);
+        $rightToReclaim = array_slice($descendants['right']['descendantPseudos'], 0, $minCount);
+
+        markDescendantsAsReclaimed($rootPseudo, $leftToReclaim, $pdo);
+        markDescendantsAsReclaimed($rootPseudo, $rightToReclaim, $pdo);
+    }
+
+    return [
+        'totalProfit' => $totalProfit,
+        'directProfit' => $directProfit,
+        'indirectProfit' => $indirectProfit
+    ];
+}
+
+$userPseudo = $_SESSION['user_r_pseudo'];
+
+$stmt = $pdo->prepare("SELECT bought, is_v FROM Users WHERE user_r_pseudo = ?");
+$stmt->execute([$userPseudo]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$user || (!$user['bought'] && !$user['is_v'])) {
+    echo translateMessage('Vous devez avoir acheté pour calculer et réclamer votre profit.');
+    exit;
+}
+
+
+$userId = getUserIdByPseudo($userPseudo, $pdo);
+list($rootLeftPseudo, $rootRightPseudo) = getRootUserPseudos($userId, $pdo);
+
+$descendants = fetchAllDescendantsWithLevel($userId, $rootLeftPseudo, $rootRightPseudo, $userPseudo, $pdo);
+
+$profitResult = calculateAdjustedProfit($descendants, $pdo, $userPseudo);
+$profit = $profitResult['totalProfit'];
+$directProfit = $profitResult['directProfit'];
+$indirectProfit = $profitResult['indirectProfit'];
+
+echo translateMessage('Votre profit total :') . " " . htmlspecialchars($profit) . " " . translateMessage('DZD') . "<br>";
+echo translateMessage('Profit direct :') . " " . htmlspecialchars($directProfit) . " " . translateMessage('DZD') . "<br>";
+echo translateMessage('Profit indirect :') . " " . htmlspecialchars($indirectProfit) . " " . translateMessage('DZD') . "<br>";
+
+if (date('w') == 4) {
+    if ($profit >= 3000) {
+        $currentTimestamp = date('Y-m-d H:i:s');
+
+        $stmt = $pdo->prepare("INSERT INTO DirectProfit (user_id, claimed_date, claimed_profit) VALUES (?, ?, ?)");
+        $stmt->execute([$userId, $currentTimestamp, $directProfit]);
+
+        if ($indirectProfit <= 150000) {
+            $stmt = $pdo->prepare("INSERT INTO IndirectProfit (user_id, claimed_date, claimed_profit) VALUES (?, ?, ?)");
+            $stmt->execute([$userId, $currentTimestamp, $indirectProfit]);
+        } else {
+            $stmt = $pdo->prepare("INSERT INTO IndirectProfit (user_id, claimed_date, claimed_profit) VALUES (?, ?, ?)");
+            $stmt->execute([$userId, $currentTimestamp, 150000]);
+
+            $excessIndirectProfit = $indirectProfit - 150000;
+            $stmt = $pdo->prepare("INSERT INTO CProfit (user_id, c_amount, c_profit_date) VALUES (?, ?, ?)");
+            $stmt->execute([$userId, $excessIndirectProfit, $currentTimestamp]);
+        }
+
+        echo translateMessage('Votre profit a été réclamé avec succès.');
+    } else {
+        echo translateMessage('Votre profit doit être supérieur ou égal à 3000 DZD pour pouvoir le réclamer.');
+    }    
+} else {
+    echo translateMessage('Vous pouvez réclamer votre profit uniquement les jeudis.');
+}
+?>

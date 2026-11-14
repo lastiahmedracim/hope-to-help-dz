@@ -1,0 +1,213 @@
+.project-draw-container {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 50px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+}
+
+.project-draw-container h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #264464;
+}
+
+.project-draw-container p {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.project-draw-container .project-item {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.project-draw-container .project-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.project-draw-container .project-item input[type="radio"] {
+  display: none;
+}
+
+.project-draw-container .project-item label {
+  cursor: pointer;
+}
+
+.project-draw-container .project-item h3 {
+  font-size: 1.6rem;
+  color: #264464;
+  margin-bottom: 10px;
+}
+
+.project-draw-container .project-item p {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+[dir="rtl"] .project-draw-container .project-item p {
+  text-align: right;
+}
+
+.project-draw-container .project-item p strong {
+  color: #264464;
+}
+
+.project-draw-container .btn-participate-draw {
+  display: block;
+  margin: 30px auto 0;
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.project-draw-container .btn-participate-draw:hover {
+  background-color: #0056b3;
+}
+
+.project-draw-container .project-item input[type="radio"]:checked + label {
+  background-color: #f0f8ff;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  padding: 18px;
+  display: block;
+}
+
+#p-i-d-message {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  display: none;
+}
+
+#p-i-d-message.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+#p-i-d-message.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+.btn-pay-access {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-pay-access:hover {
+  background-color: #45a049;
+}
+
+#pp-message {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.success-message {
+  color: #4CAF50;
+}
+
+.error-message {
+  color: #f44336;
+}
+
+.insufficient-funds {
+  color: #f44336;
+  font-weight: bold;
+}
+
+#add-pro .container {
+  background-color: #fff;
+  padding: 20px;
+  margin: 50px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+}
+
+#add-pro h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 70px;
+  color: #264464;
+}
+
+#pp-message, #p-i-d-message {
+  margin-top: 10px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+}
+
+.success-message, #p-i-d-message.success {
+  color: #4CAF50;
+  background-color: #e8f5e9;
+  border: 1px solid #a5d6a7;
+}
+
+.error-message, #p-i-d-message.error {
+  color: #f44336;
+  background-color: #ffebee;
+  border: 1px solid #ef9a9a;
+}
+
+[dir="rtl"] .project-draw-container .project-item {
+  text-align: right;
+}
+
+[dir="rtl"] .project-draw-container .project-item p strong {
+  margin-left: 5px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .btn-pay-access,
+[dir="rtl"] .btn-participate-draw {
+  font-family: 'Arial', sans-serif;
+}
+
+[dir="rtl"] .project-draw-container,
+[dir="rtl"] .project-draw-container .project-item,
+[dir="rtl"] #add-pro .container {
+  padding-left: 0;
+  padding-right: 20px;
+}
+
+[dir="rtl"] .project-draw-container .project-item,
+[dir="rtl"] #add-pro .container {
+  margin-left: 0;
+  margin-right: 50px;
+}
+
+[dir="rtl"] input[type="radio"],
+[dir="rtl"] input[type="checkbox"] {
+  margin-left: 5px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .btn-pay-access::before,
+[dir="rtl"] .btn-participate-draw::before {
+  margin-right: 0;
+  margin-left: 5px;
+}

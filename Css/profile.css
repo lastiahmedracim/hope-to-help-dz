@@ -1,0 +1,114 @@
+#profile, #infos-supplementaires .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.sidebar {
+    float: right;
+    width: 20%;
+    background-color: #fff;
+    padding: 10px;
+}
+
+.tab-btn {
+    display: block;
+    width: 100%;
+    background-color: #264464;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: left;
+    cursor: pointer;
+}
+
+.tab-btn:hover {
+    color: #b8f30e;
+}
+
+.content {
+    float: right;
+    width: 70%;
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 50px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.info-group {
+    margin-bottom: 15px;
+}
+
+.info-label {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+
+.input-field {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+.submit-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+#reclaiming-error,
+#sending-error,
+#profit,
+#demande-success,
+#demande-error,
+#info-message {
+    margin: 10px 0;
+}
+
+#demande-success {
+    display: none;
+}
+
+.info-group select {
+    text-transform: capitalize;
+    padding: 5px 5px;
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .content {
+        width: 90%;
+    }
+
+    .sidebar {
+        width: 90%;
+    }
+}

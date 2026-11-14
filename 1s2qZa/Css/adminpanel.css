@@ -1,0 +1,1357 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#top-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #264464;
+    color: #fff;
+    padding: 20px 0;
+    z-index: 1000;
+}
+
+#sidebar {
+    position: fixed;
+    top: 92px;
+    left: 0;
+    bottom: 0;
+    width: 230px;
+    background-color: #264464;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.label-t h3 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.logout a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px;
+}
+
+.logout a:hover {
+    color: #b8f30e;
+}
+
+.logout-icon {
+    display: flex;
+    align-items: center;
+}
+
+.logout-icon i {
+    margin-right: 5px;
+}
+
+.side-menu {
+    margin-top: 30px;
+    padding: 0px 10px;
+}
+
+.side-menu ul {
+    list-style-type: none;
+}
+
+.side-menu ul li {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.side-menu ul a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.side-menu ul a li:hover {
+    color: #b8f30e;
+}
+
+#cc, .cc-success-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#cc .container {
+    margin: 120px 0px 0px 230px;
+}
+
+.cc button {
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cc button:hover {
+    background-color: #264464;
+}
+
+#al {
+    margin-top: 93px;
+    margin-left: 230px;
+    padding: 20px;
+}
+
+#al table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    table-layout: auto;
+}
+
+#al table th,
+#al table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+}
+
+#al table th {
+    background-color: #264464;
+    color: #fff;
+}
+
+#al table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.virtual-money-container {
+    display: flex;
+    align-items: center;
+}
+
+.virtual-money {
+    width: 100px;
+    margin-right: 10px;
+}
+
+.update-virtual-money {
+    padding: 5px 10px;
+    background-color: #264464;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.update-virtual-money:hover {
+    background-color: #1a2f4a;
+}
+
+.payment-img {
+    width: 100%;
+    padding: 20px;
+    height: 100%;
+    display: block;
+}
+
+.show-modal {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.show-modal:hover {
+    background-color: #0056b3;
+}
+
+.order-model-container {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+}
+
+.order-model-container .order-item {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.order-model-container .close {
+    color: #aaa;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.order-model-container .close:hover,
+.order-model-container .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.action-buttons .accept, .action-buttons .reject {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-right: 5px;
+}
+
+.action-buttons .accept:hover {
+    background-color: #0056b3;
+}
+
+.action-buttons .reject {
+    background-color: #dc3545;
+}
+
+.action-buttons .reject:hover {
+    background-color: #c82333;
+}
+
+#message-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: none;
+}
+
+#message-box {
+    background-color: #fff;
+    color: #333;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    border: none;
+}
+
+#message-text {
+    margin-right: 15px;
+    font-size: 16px;
+}
+
+#message-close {
+    border: none;
+    background-color: #fff;
+}
+
+.permission-model .permission-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.permission-model .permission-button:hover {
+    background-color: #0056b3;
+}
+
+.permission-model .permission-item {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.permission-model .permission-modal-container {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.permission-model .modal-content {
+    background-color: #fff;
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.permission-model .close {
+    float: right;
+    cursor: pointer;
+}
+
+.permission-model input[type="radio"] {
+    margin-right: 10px;
+}
+
+#lvt{
+   margin-top: 93px;
+   margin-left: 230px;
+   padding: 20px;
+}
+
+#lvt .container {
+   margin: 20px auto;
+   padding: 20px;
+   background: #fff;
+   border-radius: 8px;
+   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+#lvt .container h1 {
+   text-align: center;
+   font-size: 2.5em;
+   margin-bottom: 20px;
+   color: #444;
+}
+
+.lvt-info {
+   display: flex;
+   flex-direction: column;
+}
+
+.profit-item {
+   background: #fafafa;
+   border: 1px solid #ddd;
+   padding: 20px;
+   margin: 10px;
+   border-radius: 8px;
+   flex: 1 1 calc(30% - 40px);
+   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+   text-align: center;
+}
+
+.profit-item h2 {
+   margin-bottom: 10px;
+   font-size: 1.5em;
+   color: #555;
+}
+
+.profit-item p {
+   font-size: 1.2em;
+   color: #777;
+   margin: 0;
+}
+
+.uprofit-modal-container {
+   display: none;
+   position: fixed;
+   z-index: 1000;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.uprofit-item {
+   padding: 20px;
+   background-color: #fff;
+   border-radius: 5px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   width: 80%;
+   max-width: 600px;
+   margin: 50px auto;
+   position: relative;
+}
+
+.uprofit-item div {
+    margin-top: 10px;
+}
+
+.uprofit-modal-container .modal-content {
+   background-color: #fff;
+   padding: 20px;
+   border-radius: 5px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.uprofit-modal-container .close {
+   color: #aaa;
+   font-size: 24px;
+   font-weight: bold;
+   float: right;
+   cursor: pointer;
+}
+
+.notification-close:hover,
+.uprofit-modal-container .close:hover,
+.uprofit-modal-container .close:focus {
+   color: #000;
+   text-decoration: none;
+   cursor: pointer;
+}
+
+form, form div {
+   margin-top: 20px;
+}
+
+label {
+   display: block;
+   margin-bottom: 5px;
+}
+
+.uprofit-button  {
+   padding: 5px 10px;
+   background-color: #007bff;
+   color: #fff;
+   border: none;
+   border-radius: 3px;
+   cursor: pointer;
+   margin-top: 10px;
+}
+
+.uprofit-button:hover {
+   background-color: #0056b3;
+}
+
+#permission {
+   margin-top: 93px;
+   margin-left: 230px;
+   padding: 20px;
+}
+
+.permission-content {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+   gap: 20px;
+}
+
+.permission-item {
+   background-color: #fff;
+   padding: 20px;
+   border-radius: 5px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.Coursemodal, .permission-modal-container {
+   display: none;
+   position: fixed;
+   z-index: 1000;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+   background-color: #fff;
+   width: 80%;
+   max-width: 600px;
+   margin: 20px auto;
+   padding: 20px;
+   border-radius: 5px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.Coursemodal .close, .permission-modal-container .close {
+   color: #aaa;
+   font-size: 24px;
+   font-weight: bold;
+   float: right;
+}
+
+.Coursemodal .close:hover,
+.permission-modal-container .close:hover,
+.permission-modal-container .close:focus {
+   color: #000;
+   text-decoration: none;
+   cursor: pointer;
+}
+
+#permissionForm button, .change-password-form button, .al-content button {
+   padding: 10px 10px;
+   background-color: #007bff;
+   color: #fff;
+   border: none;
+   border-radius: 3px;
+   cursor: pointer;
+}
+
+#permissionForm button:hover, .change-password-form button, .al-content button:hover {
+   background-color: #0056b3;
+}
+
+.permission-message, #uprofit-error, .change-password-message, #n-message {
+    margin-top: 10px;
+}
+
+
+.change-password-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.change-password-modal .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.change-password-modal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.change-password-modal .close:hover {
+    color: #000;
+}
+
+.change-password-modal h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.change-password-form {
+    margin-top: 20px;
+}
+
+.change-password-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.change-password-form input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.validated-info-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+}
+
+.validated-info-modal .modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.validated-info-modal .close {
+    color: #aaa;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.validated-info-modal .close:hover,
+.validated-info-modal .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.validated-info-modal .validate-changes-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.validated-info-modal .validate-changes-btn:hover {
+    background-color: #0056b3;
+}
+
+.validated-info-modal .validate-changes-message {
+    margin-top: 10px;
+}
+
+.validated-info-content {
+    margin-top: 10px;
+}
+
+.validated-info-content p {
+    margin-top: 5px;
+}
+
+@media screen and (max-width: 1200px) {
+    #sidebar {
+        width: 200px;
+    }
+
+    #cc .container, #al, #lvt, #permission {
+        margin-left: 200px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    #sidebar {
+        width: 170px;
+    }
+
+    #cc .container, #al, #lvt, #permission {
+        margin-left: 170px;
+    }
+
+    .label-t h3 {
+        font-size: 20px;
+    }
+
+    .side-menu ul a {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #top-content {
+        position: relative;
+    }
+
+    #sidebar {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(38, 68, 100, 0.95);
+        z-index: 1001;
+        overflow-y: auto;
+    }
+
+    #sidebar.active {
+        display: block;
+    }
+
+    .side-menu {
+        margin-top: 60px;
+    }
+
+    .side-menu ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .side-menu ul li {
+        margin: 10px 0;
+        font-size: 16px;
+    }
+
+    #cc .container, #al, #lvt, #permission {
+        margin: 0;
+        padding: 5px;
+        margin-top: 20px;
+    }
+
+    .top {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu-icon {
+        display: block;
+        font-size: 20px;
+        cursor: pointer;
+        margin-left: -5px;
+        z-index: 1002;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 24px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    #al table {
+        font-size: 14px;
+    }
+
+    .action-buttons .accept, .action-buttons .reject {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+    .order-model-container .close {
+        top: 0px;
+        right: 1px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .logout a {
+        font-size: 10px;
+    }
+
+    .label-t h3 {
+        font-size: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-left: 5px;
+    }
+
+    .order-model-container .order-item,
+    .permission-model .permission-item,
+    .uprofit-modal-container .uprofit-item {
+        width: 90%;
+        padding: 10px;
+        margin-top: 50px;
+    }
+
+    .profit-item {
+        margin: 5px;
+        padding: 10px;
+    }
+
+    .profit-item h2 {
+        font-size: 1.2em;
+    }
+
+    .profit-item p {
+        font-size: 1em;
+    }
+
+    .show-modal {
+        padding: 10px 10px;
+    }
+
+    #permissionForm button, .al-content button {
+        padding: 5px 2px;
+        font-size: 11px;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .menu-icon, .close-btn {
+        display: none;
+    }
+
+    #sidebar {
+        display: block !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #al tbody {
+        border-top: 1px solid #ccc;
+    }
+
+    #al thead tr {
+        display: none;
+    }
+
+    #al table th,
+    #al table td {
+        display: block;
+        border: none;
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .full-message {
+        max-width: calc(100% - 20px);
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .action-buttons .accept, .action-buttons .reject {
+        display: block;
+        width: 100%;
+        margin-bottom: 5px;
+        padding: 5px;
+    }
+}
+
+
+
+.notification-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+}
+
+.notification-modal-content {
+    background-color: #fff;
+    width: 90%;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+.notification-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.notification-close:hover {
+    color: #333;
+}
+
+.notification-modal-content h3 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.notification-form input[type="text"],
+.notification-form textarea,
+.notification-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.notification-form input[type="text"]:focus,
+.notification-form textarea:focus,
+.notification-form select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.notification-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.notification-form .input-with-icon {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.notification-form .input-with-icon input[type="datetime-local"] {
+    width: 100%;
+    padding: 12px;
+    padding-right: 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.notification-form .input-with-icon input[type="datetime-local"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.notification-form .input-with-icon i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #007bff;
+    pointer-events: none;
+}
+
+.notification-form input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.notification-submit {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.notification-submit:hover {
+    background-color: #0056b3;
+}
+
+#n-message {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+}
+
+#n-message.succes {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+#n-message.erreur {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.create-notification-btn {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 20px 0;
+}
+
+.create-notification-btn:hover {
+    background-color: #0056b3;
+}
+
+#userSelection {
+    margin-bottom: 20px;
+}
+
+#users {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+#users:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+@media screen and (max-width: 768px) {
+    .notification-modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .notification-modal-content h3 {
+        font-size: 20px;
+    }
+
+    .notification-form input[type="text"],
+    .notification-form textarea,
+    .notification-form select,
+    .notification-submit,
+    .notification-form .input-with-icon input[type="datetime-local"] {
+        font-size: 14px;
+    }
+}
+
+
+
+.status-message {
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    display: none;
+}
+
+.status-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+
+#al table td {
+    max-width: 200px;
+    width: 200px;
+    height: auto;
+    word-wrap: break-word;
+    white-space: normal;
+    vertical-align: top;
+    padding: 10px;
+}
+
+.full-content ,.full-message {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    z-index: 1;
+    max-width: 300px;
+    white-space: normal;
+    overflow: auto;
+    height: auto;
+}
+
+#al table td:hover .full-content ,#al table td:hover .full-message {
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+.Coursemodal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.Coursemodal .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0;
+    }
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+.Coursemodal .modal-content .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.Coursemodal .modal-content .close:hover,
+.Coursemodal .modal-content .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.Coursemodal .modal-content input[type="text"],
+.Coursemodal .modal-content input[type="number"],
+.Coursemodal .modal-content input[type="file"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.Coursemodal .modal-content label {
+    font-weight: bold;
+}
+
+.Coursemodal .modal-content input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.Coursemodal .modal-content input[type="submit"]:hover {
+    opacity: 0.8;
+}
+
+.Coursemodal .modal-content button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+}
+
+.Coursemodal .modal-content button:hover {
+    background-color: #0056b3;
+}
+
+
+#currentImage {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#projectModal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#projectModal .modal-content,
+.project-management-modal-content,
+#projectDetails .modal-content {
+    background-color: #ffffff;
+    margin: 5% auto;
+    padding: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#projectModal .close,
+.project-management-close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+#projectModal .close:hover,
+#projectModal .close:focus,
+.project-management-close:hover,
+.project-management-close:focus {
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#projectDetails h3 {
+    color: #007bff;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+#projectDetails p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+#projectDetails strong {
+    font-weight: 600;
+    color: #333333;
+}
+
+#projectDetails h4 {
+    color: #007bff;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+#projectDetails button,
+.category-btn,
+.project-management-category-btn {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 10px 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#projectDetails button:hover,
+.category-btn:hover,
+.project-management-category-btn:hover {
+    background-color: #0056b3;
+}
+
+.project-item,
+.project-management-project-item {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.project-item:hover,
+.project-management-project-item:hover {
+    background-color: #e9ecef;
+}
+
+.project-management-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+@media screen and (max-width: 768px) {
+    #projectModal .modal-content,
+    .project-management-modal-content,
+    #projectDetails .modal-content {
+        width: 95%;
+        padding: 20px;
+        margin: 10% auto;
+    }
+
+    #projectDetails h3 {
+        font-size: 20px;
+    }
+
+    #projectDetails h4 {
+        font-size: 18px;
+    }
+
+    .category-btn,
+    .project-management-category-btn {
+        width: 100%;
+        margin: 5px 0;
+    }
+}

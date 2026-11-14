@@ -1,0 +1,248 @@
+#contact-section {
+    background-color: #f9f9f9;
+    margin: 40px auto;
+    padding: 5px;
+    border-radius: 10px;
+    width: 90%;
+}
+
+#contact-section h1 {
+    text-align: center;
+    margin: 0 auto;
+    padding: 70px 0px;
+    font-size: 2.5rem;
+}
+
+#contact-section .container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.contact-wrapper {
+    display: flex;
+    align-items: baseline;
+}
+
+.contact-info {
+    flex: 0 0 45%;
+    max-width: 45%;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.contact-info p {
+    font-size: 1.4rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.contact-details {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.contact-details li {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.social-links {
+    margin-top: 20px;
+}
+
+.social-link {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.social-link:hover {
+    background-color: #0056b3;
+}
+
+.contact-form {
+    flex: 0 0 45%;
+    max-width: 45%;
+    padding: 20px;
+    border-radius: 15px;
+    /*box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);*/
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 95%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s ease-in-out;
+    font-size: 16px;
+}
+
+.submit-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+#contact-error {
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .contact-wrapper {
+        flex-direction: column;
+    }
+
+    .contact-info,
+    .contact-form {
+        max-width: 100%;
+        flex: 1;
+        margin-bottom: 20px;
+    }
+
+    .contact-info,
+    .contact-form,
+    .contact-form .form-group input,
+    .contact-form .form-group textarea,
+    .contact-form .submit-btn {
+        font-size: 14px;
+    }
+
+    #contact-section h1 {
+        padding: 40px 0px 0px 0px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+#contact-section h1 {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.contact-info {
+    animation: slideInLeft 0.8s ease-out 0.2s both;
+}
+
+.contact-form {
+    animation: slideInRight 0.8s ease-out 0.2s both;
+}
+
+.contact-details li {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.contact-details li:nth-child(1) { animation-delay: 0.4s; }
+.contact-details li:nth-child(2) { animation-delay: 0.6s; }
+.contact-details li:nth-child(3) { animation-delay: 0.8s; }
+
+.social-links a {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.social-links a:nth-child(1) { animation-delay: 1s; }
+.social-links a:nth-child(2) { animation-delay: 1.1s; }
+.social-links a:nth-child(3) { animation-delay: 1.2s; }
+
+.form-group input,
+.form-group textarea {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
+}
+
+.submit-btn {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #contact-section h1,
+    .contact-info,
+    .contact-form,
+    .contact-details li,
+    .social-links a {
+        animation: none;
+        opacity: 1;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .submit-btn:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
